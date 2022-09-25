@@ -1,6 +1,6 @@
 {
   "name": "load-object",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@ipld/dag-cbor": "^7.0.3",
     "js-yaml": "^4.1.0",
