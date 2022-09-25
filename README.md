@@ -2,8 +2,9 @@
 
 `load-object` is a utility package for loading a JSON object from YAML, Json, Cbor, either local or remote without bothering with manually handling the implementation of these things each time. Thus, currently, this package does the work of 6 separate boilerplate functions. Currently only available for `require` (CJS).
 
-*I'm not sure if the CBOR loading is working as it's meant to, at least, loading from github seems to destroy*
-
+Notes:
+- I'm not sure if the CBOR loading is working as it's meant to, at least, loading from github seems to turn it from binary to string.
+- Would love to support [Dhall](https://dhall-lang.org/#) in the future.
 
 ## Loading Local
 
