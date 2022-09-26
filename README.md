@@ -13,7 +13,9 @@
 - XML and maybe HTML
 - Adding directories recursively
 
-### Usage - Loading Local
+## Usage
+
+### Loading Local
 
 #### JSON
 ```node
@@ -43,7 +45,7 @@ const filePath    = "./config.dhall"
 const object      = loadObject(url)
 ```
 
-### Usage - Loading Remote
+### Loading Remote
 
 #### JSON
 ```node
