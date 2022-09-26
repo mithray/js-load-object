@@ -6,6 +6,7 @@ Notes:
 - CBOR may have issues remotely due to mime type.
 - So far no EJS support.
 - Planned support for XML and maybe HTML. XML is used like JSON and could be helpful in some applications.
+- Planned support for adding directories recursively. This would be helpful for having a lot of config files you want to load at once.
 
 ## Loading Local
 
