@@ -7,6 +7,7 @@ Notes:
 - So far no EJS support.
 - Planned support for XML and maybe HTML. XML is used like JSON and could be helpful in some applications.
 - Planned support for adding directories recursively. This would be helpful for having a lot of config files you want to load at once.
+- Dhall will probably only work on Linux and if you have dhall-to-json installed as it depends on native bindings.
 
 ## Loading Local
 
