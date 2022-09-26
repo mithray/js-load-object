@@ -2,12 +2,14 @@
 
 `load-object` is a utility package for loading data into Javascript object from YAML, JSON, CBOR, or Dhall both locally and remotely without bothering with manually handling the implementation of these things each time. Thus, currently, this package does the work of 8 separate boilerplate functions. Currently it's only available for `require` (CJS), but support for EJS is planned.
 
-Notes:
+Issues:
 - CBOR may have issues remotely due to mime type.
-- So far no EJS support.
-- Planned support for XML and maybe HTML. XML is used like JSON and could be helpful in some applications.
-- Planned support for adding directories recursively. This would be helpful for having a lot of config files you want to load at once.
 - Dhall will probably only work on Linux and if you have dhall-to-json installed as it depends on native bindings.
+
+Planned support for:
+- EJS
+- XML and maybe HTML
+- Adding directories recursively
 
 ## Loading Local
 
