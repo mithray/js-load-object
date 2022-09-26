@@ -5,12 +5,17 @@ const jsYaml              = require("js-yaml")
 const dagCbor             = require("@ipld/dag-cbor")
 const undici              = require("undici")
 const fs                  = require("fs")
+//const { exec } = require('node:child_process')
+const shelljs             = require("shelljs")
+shelljs.config.silent = true
+const exec = shelljs.exec
+const echo = shelljs.echo
 
 const R =
   (f) => memoizeWith(String,require("ramda/src/" + f + ".js"))
 
 const readLocalFile =
-  (filePath) => fs.readFileSync((filePath))
+  (filePath) => fs.readFileSync(filePath,"utf8")
 
 const readRemoteFile = 
   R("pipe")
@@ -43,6 +48,16 @@ const parseDocument =
       , [ x => [".cbor"].includes(x.extname)
         , x => dagCbor.decode(x.content)
         ]
+      , [ x => [".dhall"].includes(x.extname)
+        , x => { 
+            var access = fs.createWriteStream('/dev/null')
+            var stdwrite = process.stdout.write
+            process.stdout.write = process.stderr.write = access.write.bind(access)
+            let a = echo(x.content).exec("dhall-to-json",{silent: true})
+            process.stdout.write = process.stderr.write = stdwrite
+            return a.stdout
+          }
+        ]
       ])
     )
 
@@ -52,5 +67,7 @@ const load =
     , parseDocument
 //    , R("andThen")( R("tap")(console.log) )
     )
-
+url="https://raw.githubusercontent.com/dhall-lang/dhall-haskell/master/dhall-json/examples/travis.dhall"
+url="./test.dhall"
+load(url).then(console.log)
 module.exports = load

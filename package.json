@@ -1,16 +1,24 @@
 {
   "name": "load-object",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/mithrayls/js-load-object.git"
   },
-  "keywords": ["json","yaml","cbor","undici","load","object","utility"],
+  "keywords": [
+    "json",
+    "yaml",
+    "cbor",
+    "undici",
+    "load",
+    "object",
+    "utility"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -18,6 +26,7 @@
     "js-yaml": "^4.1.0",
     "parse-path": "^7.0.0",
     "ramda": "^0.28.0",
+    "shelljs": "^0.8.5",
     "undici": "^5.10.0"
   }
 }
