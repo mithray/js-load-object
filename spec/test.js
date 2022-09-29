@@ -6,7 +6,7 @@ const urls =
     json: 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json',
     yaml: 'https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml',
     yml: 'https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml',
-    //  , cbor: "https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor"
+//    cbor: "https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor",
     dhall: 'https://raw.githubusercontent.com/purescript/spago/2a70306d87ddb2a7a61cf5ac61fccd7d91ecae6c/templates/packages.dhall'
   }
 
