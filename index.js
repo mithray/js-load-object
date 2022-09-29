@@ -11,7 +11,7 @@ const R =
   (f) => memoizeWith(String,require("ramda/src/" + f + ".js"))
 
 const readLocalFile =
-  (filePath) => fs.readFileSync(filePath,"utf8")
+  (filePath) => fs.readFileSync(filePath)
 
 const readRemoteFile = 
   R("pipe")
@@ -42,7 +42,7 @@ const parseDocument =
         , x => JSON.parse(x.content)
         ]
       , [ x => [".cbor"].includes(x.extname)
-        , x => { console.log(x); dagCbor.decode(x.content) }
+        , x => dagCbor.decode(x.content)
         ]
       , [ x => [".dhall"].includes(x.extname)
         , x => { 
@@ -66,4 +66,5 @@ const load =
 module.exports = load
 //url="https://github.com/well-typed/cborg/raw/master/cborg/tests/test-vectors/deriving/a-newtype"
 //url="https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor"
+//url="./spec/obj-with-link.cbor"
 //load(url).then(console.log)
