@@ -1,17 +1,16 @@
 # load-object
 
+[![npm package][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+
 ## Summary
 
 `load-object` is an *immensely* useful utility package for loading data which I don't know why has not been built by others yet. It is already working very well and saving me tons of time. `load-object` loads data into a Javascript object from YAML, JSON, CBOR, or Dhall both locally and remotely without bothering with manually handling the implementation of these things each time. Thus, currently, this package does the work of 8 separate boilerplate functions. 
 
 ## Issues:
-- CBOR may have issues remotely due to mime type.
+- CBOR not working remotely due to `undici`.
 - Dhall will probably only work on Linux and if you have dhall-to-json installed as it depends on native bindings.
-
-## Planned support for:
-- XML and maybe HTML
-- Adding directories recursively
-- Add some tests
 
 ## Usage
 
@@ -26,56 +25,23 @@ import load from "load-object"
 const load = require("load-object")
 ```
 
-### Loading Local
-
-To use:
-
-#### JSON
+#### Use Locally
 ```node
+// File name should have one of these extensions .json, .yaml, .yml, .cbor, .dhall
 const filePath    = "./openapi.json"
 const object      =  load(filePath)
 ```
 
-#### YAML
+### Use Remotely
 ```node
-const filePath    = "./openapi.yaml"
-const object      =  load(filePath)
-```
-
-#### CBOR
-```node
-const filePath    = "./openapi.cbor"
-const object      =  load(filePath)
-```
-
-#### Dhall
-```node
-const filePath    = "./openapi.dhall"
-const object      = load(url)
-```
-
-### Loading Remote
-
-#### JSON
-```node
+// File name should have one of these extensions .json, .yaml, .yml, .cbor, .dhall
 const url         = "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json"
 const object      = load(url)
 ```
 
-#### YAML
-```node
-const url         = "https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml"
-const object      = load(url)
-```
-
-#### CBOR
-```node
-const url         = "https://github.com/ipld/js-dag-cbor/blob/master/test/fixtures/array-link.cbor?raw=true"
-const object      = load(url)
-```
-
-#### Dhall
-```node
-const url         = "https://raw.githubusercontent.com/dhall-lang/dhall-haskell/master/dhall-json/examples/travis.dhall"
-const object      = load(url)
-```
+[npm-image]:https://img.shields.io/npm/v/load-object.svg
+[npm-url]:http://npmjs.org/package/load-object
+[travis-image]:https://travis-ci.com/glicht/load-object.svg?branch=master
+[travis-url]:https://travis-ci.com/glicht/load-object
+[coveralls-image]:https://coveralls.io/repos/github/glicht/load-object/badge.svg?branch=master
+[coveralls-url]:https://coveralls.io/github/glicht/load-object?branch=master

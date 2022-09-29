@@ -42,7 +42,7 @@ const parseDocument =
         , x => JSON.parse(x.content)
         ]
       , [ x => [".cbor"].includes(x.extname)
-        , x => dagCbor.decode(x.content)
+        , x => { console.log(x); dagCbor.decode(x.content) }
         ]
       , [ x => [".dhall"].includes(x.extname)
         , x => { 
@@ -51,7 +51,7 @@ const parseDocument =
             process.stdout.write = process.stderr.write = access.write.bind(access)
             const { err, stdout, stderr } = shelljs.echo(x.content).exec("dhall-to-json",{silent: true})
             process.stdout.write = process.stderr.write = stdwriteOriginal
-            return stdout
+            return (JSON.parse(stdout))
           }
         ]
       ])
@@ -64,3 +64,6 @@ const load =
     )
 
 module.exports = load
+//url="https://github.com/well-typed/cborg/raw/master/cborg/tests/test-vectors/deriving/a-newtype"
+//url="https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor"
+//load(url).then(console.log)
