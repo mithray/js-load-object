@@ -1,7 +1,6 @@
 # load-object
 
 [![npm package][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 
 ## Summary
@@ -41,7 +40,5 @@ const object      = load(url)
 
 [npm-image]:https://img.shields.io/npm/v/load-object.svg
 [npm-url]:http://npmjs.org/package/load-object
-[travis-image]:https://travis-ci.com/mithrayls/js-load-object.svg?branch=master
-[travis-url]:https://travis-ci.com/mithrayls/js-load-object
-[coveralls-image]:https://coveralls.io/repos/github/mithrayls/js-load-object/badge.svg?branch=master
-[coveralls-url]:https://coveralls.io/github/mithrayls/js-load-object?branch=master
+[coveralls-image]: https://coveralls.io/repos/github/mithrayls/js-load-object/badge.svg?branch=main
+[coveralls-url]: https://coveralls.io/github/mithrayls/js-load-object?branch=main
