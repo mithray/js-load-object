@@ -1,0 +1,1 @@
+{"parent":null,"pid":421418,"argv":["/usr/local/bin/node","/home/dev/load-object/node_modules/tap/bin/run.js","spec/test.js"],"execArgv":[],"cwd":"/home/dev/load-object","time":1664455429601,"ppid":421407,"coverageFilename":"/home/dev/load-object/.nyc_output/8a775a55-e773-480a-887e-dd83b1acf0fd.json","externalId":"","uuid":"8a775a55-e773-480a-887e-dd83b1acf0fd","files":[]}
