@@ -11,16 +11,17 @@
 ## Planned support for:
 - XML and maybe HTML
 - Adding directories recursively
+- Add some tests
 
 ## Usage
 
 Include with either module type:
 
-1. MJS
+### MJS
 ``` node
 import load from "load-object"
 ```
-2. CJS
+### CJS
 ``` node
 const load = require("load-object")
 ```
