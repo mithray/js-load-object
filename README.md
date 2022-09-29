@@ -25,7 +25,7 @@ import load from "load-object"
 const load = require("load-object")
 ```
 
-#### Use Locally
+### Use Locally
 ```node
 // File name should have one of these extensions .json, .yaml, .yml, .cbor, .dhall
 const filePath    = "./openapi.json"
@@ -41,7 +41,7 @@ const object      = load(url)
 
 [npm-image]:https://img.shields.io/npm/v/load-object.svg
 [npm-url]:http://npmjs.org/package/load-object
-[travis-image]:https://travis-ci.com/glicht/load-object.svg?branch=master
-[travis-url]:https://travis-ci.com/glicht/load-object
-[coveralls-image]:https://coveralls.io/repos/github/glicht/load-object/badge.svg?branch=master
-[coveralls-url]:https://coveralls.io/github/glicht/load-object?branch=master
+[travis-image]:https://travis-ci.com/mithrayls/load-object.svg?branch=master
+[travis-url]:https://travis-ci.com/mithrayls/load-object
+[coveralls-image]:https://coveralls.io/repos/github/mithrayls/load-object/badge.svg?branch=master
+[coveralls-url]:https://coveralls.io/github/mithrayls/load-object?branch=master
