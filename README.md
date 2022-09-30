@@ -2,6 +2,10 @@
 
 [![npm package][npm-image]][npm-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
+![GitHub last commit](https://img.shields.io/github/last-commit/mithrayls/js-load-object)
+<!--
+![npms.io (quality)](https://img.shields.io/npms-io/quality-score/load-object)
+-->
 
 `load-object` is a useful `node.js` utility package for loading data. `load-object` loads data into a Javascript object from YAML, JSON, CBOR, or Dhall both locally and remotely, thereby removing the need to manually pass the files to different parsers.
 
