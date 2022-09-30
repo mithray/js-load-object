@@ -23,6 +23,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@iarna/toml": "^2.2.5",
     "@ipld/dag-cbor": "^7.0.3",
     "htmlparser2": "^8.0.1",
     "js-yaml": "^4.1.0",

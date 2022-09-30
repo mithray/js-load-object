@@ -6,6 +6,7 @@ const dagCbor = require('@ipld/dag-cbor')
 const undici = require('undici')
 const fs = require('fs')
 const shelljs = require('shelljs')
+const TOML = require('@iarna/toml')
 
 const R = (f) => memoizeWith(String, require(`ramda/src/${f}.js`))
 
@@ -34,6 +35,9 @@ const parseDocument = R('andThen')(R('cond')(
   [[(x) => ['.yaml', '.yml'].includes(x.extname),
     (x) => jsYaml.load(x.content)
   ],
+  [(x) => ['.toml'].includes(x.extname),
+    (x) => TOML.parse(x.content)
+  ],
   [(x) => ['.json'].includes(x.extname),
     (x) => JSON.parse(x.content)
   ],
@@ -42,10 +46,11 @@ const parseDocument = R('andThen')(R('cond')(
   ],
   [(x) => ['.dhall'].includes(x.extname),
     (x) => {
+      if( typeof x.content === "object") x.content = x.content.toString("utf8")
       const access = fs.createWriteStream('/dev/null')
       const stdwriteOriginal = process.stdout.write
       process.stdout.write = process.stderr.write = access.write.bind(access)
-      const { stdout } = shelljs.echo(x.content).exec('dhall-to-json', { silent: true })
+      const { err, stdout, stderr } = shelljs.echo(x.content).exec('dhall-to-json', { silent: true })
       process.stdout.write = process.stderr.write = stdwriteOriginal
       return (JSON.parse(stdout))
     }
@@ -62,4 +67,5 @@ module.exports = load
 // url="https://github.com/well-typed/cborg/raw/master/cborg/tests/test-vectors/deriving/a-newtype"
 // url="https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor"
 // url="./spec/obj-with-link.cbor"
-// load(url).then(console.log)
+//url="./spec/packages.dhall"
+//load(url)//.then(console.log)
