@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/tap/bin/run.js spec/test.js",
-    "lint": "node_modules/eslint/bin/eslint.js spec/ --fix"
+    "lint": "node_modules/eslint/bin/eslint.js spec/ --fix",
+    "precommit": "npm run lint; npm run test;"
   },
   "repository": {
     "type": "git",
