@@ -1,10 +1,11 @@
 {
   "name": "load-object",
-  "version": "1.1.1",
-  "description": "",
+  "version": "1.2.0",
+  "description": "Loads into a Javascript Object from many different formats.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/tap/bin/run.js spec/test.js"
+    "test": "node_modules/tap/bin/run.js spec/test.js",
+    "lint": "node_modules/eslint/bin/eslint.js spec/ --fix"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,6 @@
   "devDependencies": {
     "coveralls": "^3.1.1",
     "eslint": "^8.24.0",
-    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.3.0",

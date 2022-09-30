@@ -6,8 +6,8 @@ const urls =
     json: 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json',
     yaml: 'https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml',
     yml: 'https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml',
-    toml: "https://raw.githubusercontent.com/iarna/iarna-toml/latest/test/examples/hard_example.toml",
-//    cbor: "https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor",
+    toml: 'https://raw.githubusercontent.com/iarna/iarna-toml/latest/test/examples/hard_example.toml',
+    //    cbor: "https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor",
     dhall: 'https://raw.githubusercontent.com/purescript/spago/2a70306d87ddb2a7a61cf5ac61fccd7d91ecae6c/templates/packages.dhall'
   }
 
@@ -17,8 +17,8 @@ const filePaths =
     yaml: './spec/nodejs.yaml',
     yml: './spec/nodejs.yml',
     cbor: './spec/obj-with-link.cbor',
-    dhall: "./spec/packages.dhall",
-    toml: "./spec/hard_example.toml"
+    dhall: './spec/packages.dhall',
+    toml: './spec/hard_example.toml'
   }
 
 const resultIsObject =
