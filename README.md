@@ -7,7 +7,7 @@
 ![npms.io (quality)](https://img.shields.io/npms-io/quality-score/load-object)
 -->
 
-`load-object` is a useful `node.js` utility package for loading data. `load-object` loads data into a Javascript object from YAML, JSON, CBOR, or Dhall both locally and remotely, thereby removing the need to manually pass the files to different parsers.
+`load-object` is a useful `node.js` utility package for loading data. `load-object` loads data into a Javascript object from JSON, YAML, TOML, CBOR, Dhall, XML and HTML both locally and remotely, thereby removing the need to manually pass the files to different parsers.
 
 ## Issues:
 - CBOR not working remotely due to `undici`.
