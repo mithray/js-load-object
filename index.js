@@ -7,6 +7,11 @@ const undici = require('undici')
 const fs = require('fs')
 const shelljs = require('shelljs')
 const TOML = require('@iarna/toml')
+const {XMLParser} = require('fast-xml-parser');
+const options = {
+    ignoreAttributes : false
+};
+const XML = new XMLParser(options);
 
 const R = (f) => memoizeWith(String, require(`ramda/src/${f}.js`))
 
@@ -41,6 +46,12 @@ const parseDocument = R('andThen')(R('cond')(
   [(x) => ['.json'].includes(x.extname),
     (x) => JSON.parse(x.content)
   ],
+  [(x) => ['.xml'].includes(x.extname),
+    (x) => XML.parse(x.content)
+  ],
+  [(x) => ['.html'].includes(x.extname),
+    (x) => XML.parse(x.content)
+  ],
   [(x) => ['.cbor'].includes(x.extname),
     (x) => dagCbor.decode(x.content)
   ],
@@ -68,4 +79,6 @@ module.exports = load
 // url="https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor"
 // url="./spec/obj-with-link.cbor"
 //url="./spec/packages.dhall"
-//load(url)//.then(console.log)
+//url="https://raw.githubusercontent.com/NaturalIntelligence/fast-xml-parser/master/spec/assets/mini-sample.xml"
+//url="http://example.com/index.html"
+//load(url).then(console.log)
