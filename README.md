@@ -3,6 +3,9 @@
 [![npm package][npm-image]][npm-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 ![GitHub last commit](https://img.shields.io/github/last-commit/mithrayls/js-load-object)
+![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/load-object)
+![NPM](https://img.shields.io/npm/l/load-object)
+
 <!--
 ![npms.io (quality)](https://img.shields.io/npms-io/quality-score/load-object)
 -->
