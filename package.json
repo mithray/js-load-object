@@ -1,7 +1,7 @@
 {
   "name": "load-object",
   "version": "1.4.0",
-  "description": "Loads into a Javascript Object from many different formats.",
+  "description": "Takes a path to a file locally or remotely and loads that file into a Javascript Object.",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/tap/bin/run.js spec/test.js",
@@ -14,6 +14,7 @@
   },
   "keywords": [
     "json",
+    "markdown",
     "yaml",
     "toml",
     "cbor",
