@@ -1,6 +1,6 @@
 {
   "name": "load-object",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Takes a path to a file locally or remotely and loads that file into a Javascript Object.",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@iarna/toml": "^2.2.5",
+    "@iarna/toml": "^3.0.0",
     "@ipld/dag-cbor": "^7.0.3",
     "fast-xml-parser": "^4.0.10",
     "htmlparser2": "^8.0.1",
