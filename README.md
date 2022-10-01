@@ -5,7 +5,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/mithrayls/js-load-object)
 ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/load-object)
 ![NPM](https://img.shields.io/npm/l/load-object)
-![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/mithrayls/js-load-object?style=flat-square)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/mithrayls/js-load-object)
 
 <!--
 Hasn't been picked up yet:
