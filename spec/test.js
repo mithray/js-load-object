@@ -7,10 +7,10 @@ const urls =
     yaml: 'https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml',
     yml: 'https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml',
     toml: 'https://raw.githubusercontent.com/iarna/iarna-toml/latest/test/examples/hard_example.toml',
+    dhall: 'https://raw.githubusercontent.com/purescript/spago/2a70306d87ddb2a7a61cf5ac61fccd7d91ecae6c/templates/packages.dhall',
+    cbor: 'https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor',
     xml: 'https://raw.githubusercontent.com/NaturalIntelligence/fast-xml-parser/master/spec/assets/mini-sample.xml',
     html: 'http://example.com/index.html',
-    cbor: 'https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor',
-    dhall: 'https://raw.githubusercontent.com/purescript/spago/2a70306d87ddb2a7a61cf5ac61fccd7d91ecae6c/templates/packages.dhall',
     md: 'https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md'
   }
 
@@ -19,11 +19,11 @@ const filePaths =
     json: './package.json',
     yaml: './spec/nodejs.yaml',
     yml: './spec/nodejs.yml',
-    cbor: './spec/obj-with-link.cbor',
-    dhall: './spec/packages.dhall',
     toml: './spec/hard_example.toml',
-    html: './spec/example.html',
+    dhall: './spec/packages.dhall',
+    cbor: './spec/obj-with-link.cbor',
     xml: './spec/mini-sample.xml',
+    html: './spec/example.html',
     md: './README.md'
   }
 
