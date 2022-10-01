@@ -5,13 +5,11 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/mithrayls/js-load-object)
 ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/load-object)
 ![NPM](https://img.shields.io/npm/l/load-object)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/mithrayls/js-load-object?style=flat-square)
 
 <!--
 Hasn't been picked up yet:
 ![npms.io (quality)](https://img.shields.io/npms-io/quality-score/load-object)
-
-fix out of date dependency first
-![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/mithrayls/js-load-object?style=flat-square)
 -->
 
 `load-object` is a useful `node.js` utility package for loading data. `load-object` loads data into a Javascript object from JSON, YAML, TOML, CBOR, Dhall, XML, HTML and Markdown both locally and remotely, thereby removing the need to manually pass the files to different parsers.
