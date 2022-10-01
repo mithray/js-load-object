@@ -7,11 +7,13 @@ const undici = require('undici')
 const fs = require('fs')
 const shelljs = require('shelljs')
 const TOML = require('@iarna/toml')
-const {XMLParser} = require('fast-xml-parser');
+const {XMLParser} = require('fast-xml-parser')
 const options = {
     ignoreAttributes : false
 };
-const XML = new XMLParser(options);
+const marked = require("marked")
+
+const XML = new XMLParser(options)
 
 const R = (f) => memoizeWith(String, require(`ramda/src/${f}.js`))
 
@@ -55,6 +57,14 @@ const parseDocument = R('andThen')(R('cond')(
   [(x) => ['.cbor'].includes(x.extname),
     (x) => dagCbor.decode(x.content)
   ],
+  [(x) => ['.md'].includes(x.extname),
+    (x) => {
+      if( typeof x.content === "object") x.content = x.content.toString("utf8")
+      const html = (marked.parse(x.content))
+      const obj = XML.parse(html)
+      return obj
+    }
+  ],
   [(x) => ['.dhall'].includes(x.extname),
     (x) => {
       if( typeof x.content === "object") x.content = x.content.toString("utf8")
@@ -80,5 +90,6 @@ module.exports = load
 // url="./spec/obj-with-link.cbor"
 //url="./spec/packages.dhall"
 //url="https://raw.githubusercontent.com/NaturalIntelligence/fast-xml-parser/master/spec/assets/mini-sample.xml"
-//url="http://example.com/index.html"
-//load(url).then(console.log)
+//url="https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md"
+url="./README.md"
+load(url).then(console.log)

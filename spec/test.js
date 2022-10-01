@@ -10,7 +10,8 @@ const urls =
     xml: 'https://raw.githubusercontent.com/NaturalIntelligence/fast-xml-parser/master/spec/assets/mini-sample.xml',
     html: 'http://example.com/index.html',
     //    cbor: "https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor",
-    dhall: 'https://raw.githubusercontent.com/purescript/spago/2a70306d87ddb2a7a61cf5ac61fccd7d91ecae6c/templates/packages.dhall'
+    dhall: 'https://raw.githubusercontent.com/purescript/spago/2a70306d87ddb2a7a61cf5ac61fccd7d91ecae6c/templates/packages.dhall',
+    md: 'https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md'
   }
 
 const filePaths =
@@ -22,7 +23,8 @@ const filePaths =
     dhall: './spec/packages.dhall',
     toml: './spec/hard_example.toml',
     html: './spec/example.html',
-    xml: './spec/mini-sample.xml'
+    xml: './spec/mini-sample.xml',
+    md: './README.md'
   }
 
 const resultIsObject =
