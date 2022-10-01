@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1
+
+- Refactored. Separated parsers to their own file. Managed to lower the LOC
+
 ## 1.4.0
 
 - Added Markdown Support

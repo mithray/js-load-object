@@ -37,14 +37,14 @@ const load = require("load-object")
 
 ### Use Locally
 ```node
-// Should have one of these extensions: .json, .yaml, .yml, .dhall, .toml, .cbor
+// Should have one of these extensions: .json, .yaml, .yml, .dhall, .toml, .md, .cbor
 const filePath = "./openapi.json"
 const object  = load(filePath)
 ```
 
 ### Use Remotely
 ```node
-// Should have one of these extensions: .json, .yaml, .yml, .dhall, .toml
+// Should have one of these extensions: .json, .yaml, .yml, .dhall, .toml, .md
 const url = "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json"
 const object = load(url)
 ```
