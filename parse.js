@@ -23,7 +23,7 @@ const parsers =
   , cbor: (x) => dagCbor.decode(x)
   , md: (x) => XML.parse(marked.parse(x.toString("utf8")))
   , dhall: (x) => {
-      if( typeof x === "object") x = x.toString("utf8")
+      x = x.toString("utf8")
       const access = fs.createWriteStream('/dev/null')
       const stdwriteOriginal = process.stdout.write
       process.stdout.write = process.stderr.write = access.write.bind(access)
