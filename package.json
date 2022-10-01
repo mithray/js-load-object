@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node_modules/tap/bin/run.js spec/test.js",
     "lint": "node_modules/eslint/bin/eslint.js spec/ --fix",
-    "precommit": "npm run lint; npm run test; rm ./package-lock.json"
+    "cloc": "cloc --vcs git",
+    "precommit": "npm run lint; npm run test; npm run cloc; rm ./package-lock.json"
   },
   "repository": {
     "type": "git",

@@ -21,12 +21,7 @@ const parsers =
   , html: (x) => XML.parse(x)
   , xml: (x) => XML.parse(x)
   , cbor: (x) => dagCbor.decode(x)
-  , md: (x) => {
-      if( typeof x === "object") x = x.toString("utf8")
-      const html = (marked.parse(x))
-      const obj = XML.parse(html)
-      return obj
-    }
+  , md: (x) => XML.parse(marked.parse(x.toString("utf8")))
   , dhall: (x) => {
       if( typeof x === "object") x = x.toString("utf8")
       const access = fs.createWriteStream('/dev/null')
