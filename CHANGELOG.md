@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0
+
+- CBOR now working Remotely
+
 ## 1.4.1
 
 - Refactored. Separated parsers to their own file. Managed to lower the LOC

@@ -1,12 +1,12 @@
 {
   "name": "load-object",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "Takes a path to a file locally or remotely and loads that file into a Javascript Object.",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/tap/bin/run.js spec/test.js",
     "lint": "node_modules/eslint/bin/eslint.js spec/ --fix",
-    "precommit": "npm run lint; npm run test;"
+    "precommit": "npm run lint; npm run test; rm ./package-lock.json"
   },
   "repository": {
     "type": "git",

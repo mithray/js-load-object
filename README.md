@@ -5,17 +5,23 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/mithrayls/js-load-object)
 ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/load-object)
 ![NPM](https://img.shields.io/npm/l/load-object)
+<!-- Some how there is still an out of date dependency here, I can't work out where it is-->
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/mithrayls/js-load-object)
 
 <!--
-Hasn't been picked up yet:
+npms.io hasn't picked up this package yet!:
 ![npms.io (quality)](https://img.shields.io/npms-io/quality-score/load-object)
+
+Will Include this badge probably if I use clojurescript. Otherwise, there's nothing special about Javascript!
+![GitHub top language](https://img.shields.io/github/languages/top/mithrayls/js-load-object)
+
+Package Health, just monitor this until it gets a bit higher ;-)
+[![load-object](https://snyk.io/advisor/npm-package/load-object/badge.svg)](https://snyk.io/advisor/npm-package/load-object)
 -->
 
 `load-object` is a useful `node.js` utility package for loading data. `load-object` loads data into a Javascript object from JSON, YAML, TOML, CBOR, Dhall, XML, HTML and Markdown both locally and remotely, thereby removing the need to manually pass the files to different parsers.
 
 ## Issues:
-- CBOR not working remotely due to `undici`.
 - Dhall will probably only work on Linux and if you have dhall-to-json installed as it depends on native bindings.
 
 ## Installation

@@ -9,7 +9,7 @@ const urls =
     toml: 'https://raw.githubusercontent.com/iarna/iarna-toml/latest/test/examples/hard_example.toml',
     xml: 'https://raw.githubusercontent.com/NaturalIntelligence/fast-xml-parser/master/spec/assets/mini-sample.xml',
     html: 'http://example.com/index.html',
-    //    cbor: "https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor",
+    cbor: 'https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor',
     dhall: 'https://raw.githubusercontent.com/purescript/spago/2a70306d87ddb2a7a61cf5ac61fccd7d91ecae6c/templates/packages.dhall',
     md: 'https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md'
   }

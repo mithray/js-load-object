@@ -7,10 +7,21 @@ const path = require('path')
 
 const R = (f) => memoizeWith(String, require(`ramda/src/${f}.js`))
 
-const readRemoteFile = R('pipe')(
+const requestRemoteFile = R('pipe')(
   undici.request,
   R('andThen')((x) => x.body.text())
 )
+
+const fetchRemoteFile = R("pipe")(
+  undici.fetch,
+  R("andThen")( (x) => x.body.getReader()),
+  R("andThen")( (x) => x.read()),
+  R("andThen")( ({done, value}) => value)
+
+)
+/*
+console.log(undici.file)
+*/
 const readLocalFile = (filePath) => fs.readFileSync(filePath)
 
 const getDocument = R('ifElse')(
@@ -22,7 +33,7 @@ const getDocument = R('ifElse')(
     }),
   async (x) => (
     {
-      content: await readRemoteFile(x),
+      content: (path.extname(x) === ".cbor") ? await fetchRemoteFile(x) : await requestRemoteFile(x),
       extname: path.extname(x)
     })
 )
@@ -37,8 +48,7 @@ const load = R('pipe')(
 module.exports = load
 //url="./README.md"
 //url="https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md"
-//readRemoteFile(url).then( (x) => { 
+//requestRemoteFile(url).then( (x) => { 
 //  return { content: x, extname } 
 //})
 //getDocument(url).then(parseDocument)
-//load(url).then(console.log)
