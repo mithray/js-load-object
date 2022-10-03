@@ -17,12 +17,15 @@ Will Include this badge probably if I use clojurescript. Otherwise, there's noth
 
 Package Health, just monitor this until it gets a bit higher ;-)
 [![load-object](https://snyk.io/advisor/npm-package/load-object/badge.svg)](https://snyk.io/advisor/npm-package/load-object)
+
+Might include later
+[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 -->
 
 `load-object` is a useful `node.js` utility package for loading data. `load-object` loads data into a Javascript object from JSON, YAML, TOML, CBOR, Dhall, XML, HTML and Markdown both locally and remotely, thereby removing the need to manually pass the files to different parsers.
 
 ## Issues:
-- Dhall will probably only work on Linux and if you have dhall-to-json installed as it depends on native bindings. A resolution is planned for this by rewriting in `ClojureScript`.
+- Dhall will probably only work on Linux and if you have dhall-to-json installed as it depends on native bindings. A resolution is planned for this by rewriting in `Purescript`.
 
 ## Installation
 

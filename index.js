@@ -1,54 +1,50 @@
-const parse = require("./parse.js")
-const memoizeWith = require('ramda/src/memoizeWith.js')
-const parsePath = require('parse-path')
-const undici = require('undici')
-const fs = require('fs')
-const path = require('path')
+import { andThen, cond, pipe, over, lensProp, assoc } from "ramda"
+import { tap } from "ramda"
+import parsePath from "parse-path"
+import undici from "undici"
+import { readFile as readLocalFile } from "node:fs/promises"
+import { statSync } from "fs"
+import * as path from "path"
+import parse from "./parse.js"
 
-const R = (f) => memoizeWith(String, require(`ramda/src/${f}.js`))
+const setExtension = (x) => assoc("extname",path.extname(x.href).replace(/^\./,""),x)
+const readRemoteFile = pipe
+  ( undici.request
+  , andThen( (x) => x.body.text() )
+  )
+const fetchRemoteFile = pipe
+  ( undici.fetch
+  , andThen( (x) => x.body.getReader().read())
+  , andThen( ({done, value}) => value)
+  )
 
-const requestRemoteFile = R('pipe')(
-  undici.request,
-  R('andThen')((x) => x.body.text())
-)
+const getDocument =
+  cond(
+      [ [ (x) => ["file"].includes(x.protocol) && statSync(x.href).isFile()
+        , async (x) => ({...x, content: await readLocalFile(x.href)})
+        ]
 
-const fetchRemoteFile = R("pipe")(
-  undici.fetch,
-  R("andThen")( (x) => x.body.getReader()),
-  R("andThen")( (x) => x.read()),
-  R("andThen")( ({done, value}) => value)
+      , [ (x) => ["file"].includes(x.protocol) && statSync(x.href).isDirectory()
+        , async (x) => ({...x, content: await readLocalFile(x.href)})
+        ]
 
-)
-/*
-console.log(undici.file)
-*/
-const readLocalFile = (filePath) => fs.readFileSync(filePath)
+      , [ (x) => ["http", "https"].includes(x.protocol) && x.extname === "cbor"
+        , async (x) => ({...x, content: await fetchRemoteFile(x.href)})
+        ]
 
-const getDocument = R('ifElse')(
-  (x) => R('equals')(parsePath(x).protocol, 'file'),
-  async (x) => (
-    {
-      content: await readLocalFile(x),
-      extname: path.extname(x)
-    }),
-  async (x) => (
-    {
-      content: (path.extname(x) === ".cbor") ? await fetchRemoteFile(x) : await requestRemoteFile(x),
-      extname: path.extname(x)
-    })
-)
+      , [ (x) => ["http", "https"].includes(x.protocol)
+        , async (x) => ({...x, content: await readRemoteFile(x.href)})
+        ]
 
-const parseDocument = (obj) => parse(obj.content,obj.extname)
+      ]
+  )
 
-const load = R('pipe')(
-  getDocument,
-  R("andThen")(parseDocument)
-)
+const load = pipe
+  ( parsePath
+  , setExtension
+  , getDocument
+  , andThen(parse)
+//  , (x) => x.content
+  )
 
-module.exports = load
-//url="./README.md"
-//url="https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md"
-//requestRemoteFile(url).then( (x) => { 
-//  return { content: x, extname } 
-//})
-//getDocument(url).then(parseDocument)
+export default load

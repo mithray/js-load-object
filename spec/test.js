@@ -1,46 +1,30 @@
-const load = require('../index.js')
-const t = require('tap')
+import load from "../index.js"
+import t from "tap"
+import { writeFile as writeLocalFile } from "node:fs/promises"
+import { map } from "ramda"
+const urls = await load("./spec/test_urls.yaml")
 
-const urls =
-  {
-    json: 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json',
-    yaml: 'https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml',
-    yml: 'https://raw.githubusercontent.com/gothinkster/realworld/main/api/openapi.yml',
-    toml: 'https://raw.githubusercontent.com/iarna/iarna-toml/latest/test/examples/hard_example.toml',
-    dhall: 'https://raw.githubusercontent.com/purescript/spago/2a70306d87ddb2a7a61cf5ac61fccd7d91ecae6c/templates/packages.dhall',
-    cbor: 'https://github.com/ipld/js-dag-cbor/raw/master/test/fixtures/obj-with-link.cbor',
-    xml: 'https://raw.githubusercontent.com/NaturalIntelligence/fast-xml-parser/master/spec/assets/mini-sample.xml',
-    html: 'http://example.com/index.html',
-    md: 'https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md'
-  }
-
-const filePaths =
-  {
-    json: './package.json',
-    yaml: './spec/nodejs.yaml',
-    yml: './spec/nodejs.yml',
-    toml: './spec/hard_example.toml',
-    dhall: './spec/packages.dhall',
-    cbor: './spec/obj-with-link.cbor',
-    xml: './spec/mini-sample.xml',
-    html: './spec/example.html',
-    md: './README.md'
-  }
-
-const resultIsObject =
-  async (x) => {
-    const result = await load(x.url)
-    t.equal(typeof result, 'object', 'Type ".' + x.type + '" should load as object')
-  }
+const timestamp = Date.now()
 
 t.test('Remote Tests', async t => {
-  Object.entries(urls).forEach(async x => {
-    await resultIsObject({ type: x[0], url: x[1] })
-  })
+
+  for(let i = 0; i < urls.length; i++){
+    const testDescription = "Remote " + urls[i].format + " should load to an object"
+    const res = await load(urls[i].path)
+    t.test(testDescription, async t => t.equal(typeof res, 'object'))
+    const tmpFileName = "/tmp/load-object-"+timestamp+"."+urls[i].format
+    writeLocalFile(tmpFileName,res.toString())
+  }
+
 })
 
+/*
 t.test('Local Tests', async t => {
-  Object.entries(filePaths).forEach(async x => {
-    await resultIsObject({ type: x[0], url: x[1] })
-  })
+  for(let i = 0; i < urls.length; i++){
+    const testDescription = "Local " + urls[i].format + " should load to an object"
+    const tmpFileName = "/tmp/load-object-"+timestamp+"-"+urls[i].path
+    const res = await load(tmpFileName)
+    t.test(testDescription, async t => t.equal(typeof res, 'object'))
+  }
 })
+*/
