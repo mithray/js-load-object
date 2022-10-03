@@ -7,7 +7,7 @@ import { decode as cborDecode} from '@ipld/dag-cbor'
 import shelljs from "shelljs"
 import { createWriteStream } from "node:fs"
 
-const parsers =
+export const parsers =
   { yaml: (x) => jsYaml(x)
   , yml: (x) => jsYaml(x)
   , json: (x) => JSON.parse(x)
@@ -26,5 +26,3 @@ const parsers =
       return (JSON.parse(stdout))
     }
   }
-
-export default ( x ) => parsers[x.format](x.content)

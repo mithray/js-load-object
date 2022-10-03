@@ -1,4 +1,4 @@
-import load from '../index.js'
+import { load } from '../index.js'
 import t from 'tap'
 import { writeFile as writeLocalFile } from 'node:fs/promises'
 const urls = await load('./spec/test_urls.yaml')
