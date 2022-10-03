@@ -27,4 +27,4 @@ const parsers =
     }
   }
 
-export default ( x ) => parsers[x.extname](x.content)
+export default ( x ) => parsers[x.format](x.content)
