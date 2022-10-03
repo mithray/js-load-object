@@ -1,5 +1,4 @@
 import { andThen, cond, pipe, over, lensProp, assoc } from "ramda"
-import { tap } from "ramda"
 import parsePath from "parse-path"
 import undici from "undici"
 import { readFile as readLocalFile } from "node:fs/promises"
@@ -44,7 +43,6 @@ const load = pipe
   , setExtension
   , getDocument
   , andThen(parse)
-//  , (x) => x.content
   )
 
 export default load
