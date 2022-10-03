@@ -1,6 +1,6 @@
 {
   "name": "load-object",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "Takes a path to a file locally or remotely and loads that file into a Javascript Object.",
   "main": "index.js",
   "scripts": {

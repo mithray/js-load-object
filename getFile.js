@@ -1,4 +1,4 @@
-import { andThen, cond, pipe, over, lensProp, assoc, filter, collectBy, map, mapObjIndexed, view, replace } from "ramda"
+import { andThen, cond, pipe, over, lensProp, assoc, filter, collectBy, map, mapObjIndexed, view, replace, zipObj, when, ifElse, tap } from "ramda"
 import parsePath from "parse-path"
 import undici from "undici"
 import { readFile, readdir } from "node:fs/promises"
@@ -12,10 +12,13 @@ const readLocalDirectory =
   async (href) => { 
     const paths = await readdir(href)
     const files = map(load,paths)
-    return files//Buffer.from("{}")
+    const obj = zipObj(paths,files)
+    return obj//Buffer.from("{}")
   }
 const readRemoteDocument= pipe
-  ( undici.request
+  ( (href) => when( (href) => getFormat(href)==="html"&&path.extname(href)==="",(href)=>path.join(href.replace(/\/$/,""),"index.html"))(href)
+  , tap(console.log)
+  , undici.request
   , andThen( (x) => x.body.text() )
   )
 const readRemoteBinary = pipe
@@ -24,10 +27,14 @@ const readRemoteBinary = pipe
   , andThen( ({done, value}) => value)
   )
 
-export const getFormat = pipe
+export const getFormat = ifElse
+  ( href => ["http","https"].includes(parsePath(href).protocol) && path.extname(href.replace(parsePath(href).host,"")) === ""
+  , href => "html"
+  , pipe
     ( path.extname
     , replace(/^\./,"")
     )
+  )
 
 const isRemoteDocument = (href) => ["http","https"].includes(parsePath(href).protocol)
 const isRemoteBinary   = (href) => ["http","https"].includes(parsePath(href).protocol) && getFormat(href) === "cbor"
@@ -56,3 +63,4 @@ export const getFile = cond
         , readRemoteDocument 
         ]
       ])
+
