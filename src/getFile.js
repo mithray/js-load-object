@@ -17,7 +17,6 @@ const readLocalDirectory =
   }
 const readRemoteDocument= pipe
   ( (href) => when( (href) => getFormat(href)==="html"&&path.extname(href)==="",(href)=>path.join(href.replace(/\/$/,""),"index.html"))(href)
-  , tap(console.log)
   , undici.request
   , andThen( (x) => x.body.text() )
   )
@@ -63,4 +62,3 @@ export const getFile = cond
         , readRemoteDocument 
         ]
       ])
-

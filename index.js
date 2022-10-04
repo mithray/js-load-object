@@ -1,14 +1,15 @@
-import { andThen, cond, pipe, over, lensProp, assoc, filter, collectBy, map, mapObjIndexed, view, replace } from "ramda"
-import parsePath from "parse-path"
-import undici from "undici"
 import { readFile as readLocalDocument, readdir } from "node:fs/promises"
+import { Buffer } from "node:buffer"
 import { statSync } from "fs"
 import * as path from "path"
-import { parsers } from "./parsers.js"
-import { tap } from "ramda"
-import { Buffer } from "node:buffer"
-import { getFile } from "./getFile.js"
-import { getFormat } from "./getFile.js"
+import { andThen, cond, pipe, over, lensProp, assoc, filter, collectBy, map, mapObjIndexed, view, replace, tap } from "ramda"
+import parsePath from "parse-path"
+import undici from "undici"
+import { decycle } from "./src/cycle.js"
+
+import { parsers } from "./src/parsers.js"
+import { getFile } from "./src/getFile.js"
+import { getFormat } from "./src/getFile.js"
 
 //
 // A Parser takes content in one format, returns in another
@@ -41,4 +42,8 @@ export const loadMd = loaders["md"]
 export const loadCbor = loaders["cbor"]
 export const loadDhall = loaders["dhall"]
 
+const url="https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md"
 export const load = x => loaders[getFormat(x)](x)
+
+//console.log(JSON.stringify(await load(url)))
+console.log(decycle(await load(url)))
