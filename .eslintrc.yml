@@ -1,9 +1,27 @@
 env:
   browser: true
-  commonjs: true
   es2021: true
-extends: eslint-config-hardcore
+  node: true
+extends:
+- "plugin:functional/recommended"
+- "plugin:functional/external-recommended"
+- "plugin:functional/stylistic"
+plugins: [ "functional" ]
 overrides: []
 parserOptions:
   ecmaVersion: latest
-rules: {}
+  sourceType: module
+rules:
+  semi:
+  - warn
+  - never
+  quotes:
+  - warn
+  - double
+  comma-style: 
+  - warn
+  - first
+  comma-spacing:
+  - warn
+  - before: false
+    after: true

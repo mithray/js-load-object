@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/tap/bin/run.js --reporter=specy spec/test.js",
-    "lint": "node_modules/eslint/bin/eslint.js spec/ src/ index.js --fix",
+    "lint": "node_modules/eslint/bin/eslint.js bin/* spec/* src/* index.js --fix",
     "cloc": "cloc --vcs git",
     "precommit": "npm run lint; npm run test; npm run cloc; rm ./package-lock.json"
   },
@@ -32,6 +32,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "@gipphe/eslint-config-haskellish": "^0.2.0",
     "@iarna/toml": "^3.0.0",
     "@ipld/dag-cbor": "^7.0.3",
     "cborg": "^1.9.5",
@@ -52,6 +53,7 @@
     "eslint": "^8.24.0",
     "eslint-config-hardcore": "^25.0.0",
     "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-functional": "^4.4.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.3.0",
     "eslint-plugin-promise": "^6.0.1",

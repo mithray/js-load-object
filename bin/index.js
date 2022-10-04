@@ -1,2 +1,8 @@
-const load = require("../index.js")
-load(process.argv[2]).then(console.log)
+import { load } from "../index.js"
+import { pipe } from "ramda"
+
+pipe
+  ( load
+  , JSON.stringify
+  , console.log
+  ) (process.argv[2])
