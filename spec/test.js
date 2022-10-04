@@ -1,28 +1,36 @@
-import { load } from '../index.js'
-import t from 'tap'
-import { writeFile as writeLocalFile } from 'node:fs/promises'
-import c from 'ansi-colors'
-const urls = await load('./spec/test_urls.yaml')
+import { writeFile as writeLocalFile } from "node:fs/promises";
 
-const timestamp = Date.now()
+import { test } from "tap";
+import c from "ansi-colors";
 
-t.test('Remote Tests', async t => {
-  for (let i = 0; i < urls.length; i++) {
-    const testDescription = 'Remote ' + c.blue(urls[i].format) + ' should load to an object'
-    const res = await load(urls[i].path)
-    t.test(testDescription, async t => t.equal(typeof res, 'object'))
-    const tmpFileName = '/tmp/load-object-' + timestamp + '.' + urls[i].format
-    writeLocalFile(tmpFileName, res.toString())
+import { load } from "../index.js";
+
+const urls = await load("./spec/test_urls.yaml");
+
+const timestamp = Date.now();
+
+test("Remote Tests", async (tap) => {
+  for (const url of urls) {
+    const testDescription = `Remote ${c.blue(
+      url.format
+    )}should load to an object`;
+    const res = await load(url.path);
+
+    tap.test(testDescription, async (tap) => tap.equal(typeof res, "object"));
+
+    const temporaryFileName = `/tmp/load-object-${timestamp}.${url.format}`;
+
+    writeLocalFile(temporaryFileName, res.toString());
   }
-})
+});
 
-/*
-t.test('Local Tests', async t => {
-  for(let i = 0; i < urls.length; i++){
-    const testDescription = "Local " + urls[i].format + " should load to an object"
-    const tmpFileName = "/tmp/load-object-"+timestamp+"-"+urls[i].path
-    const res = await load(tmpFileName)
-    t.test(testDescription, async t => t.equal(typeof res, 'object'))
-  }
-})
-*/
+//
+// t.test('Local Tests', async t => {
+// for(let i = 0; i < urls.length; i++){
+//     const testDescription = "Local " + urls[i].format + " should load to an object"
+//     const tmpFileName = "/tmp/load-object-"+timestamp+"-"+urls[i].path
+//     const res = await load(tmpFileName)
+//     t.test(testDescription, async t => t.equal(typeof res, 'object'))
+// }
+// })
+//
