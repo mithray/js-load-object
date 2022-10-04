@@ -43,7 +43,4 @@ export const loadMd = loaders["md"]
 export const loadCbor = loaders["cbor"]
 export const loadDhall = loaders["dhall"]
 
-const url ="https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md"
 export const load = x => loaders[getFormat(x)](x)
-const res = jc.decycle(await load(url))
-console.log(res)
