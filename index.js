@@ -5,7 +5,8 @@ import * as path from "path"
 import { andThen, cond, pipe, over, lensProp, assoc, filter, collectBy, map, mapObjIndexed, view, replace, tap } from "ramda"
 import parsePath from "parse-path"
 import undici from "undici"
-import { decycle } from "./src/cycle.js"
+//import { decycle } from "./src/cycle.js"
+import jc from "json-cycle"
 
 import { parsers } from "./src/parsers.js"
 import { getFile } from "./src/getFile.js"
@@ -42,8 +43,7 @@ export const loadMd = loaders["md"]
 export const loadCbor = loaders["cbor"]
 export const loadDhall = loaders["dhall"]
 
-const url="https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md"
+const url ="https://raw.githubusercontent.com/mithrayls/js-load-object/main/README.md"
 export const load = x => loaders[getFormat(x)](x)
-
-//console.log(JSON.stringify(await load(url)))
-console.log(decycle(await load(url)))
+const res = jc.decycle(await load(url))
+console.log(res)
