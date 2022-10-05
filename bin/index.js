@@ -1,8 +1,8 @@
 import { load } from "../index.js"
 import { pipe } from "ramda"
 
-pipe
+const res = await pipe
   ( load
   , JSON.stringify
-  , console.log
+  , console.log(res)
   ) (process.argv[2])
