@@ -23,11 +23,11 @@
     "undici",
     "load",
     "parse",
+    "parser",
     "html",
     "xml",
     "cheerio",
     "fetch",
-    "parser",
     "object",
     "utility"
   ],
