@@ -16,16 +16,15 @@ const parseJSON = JSON.parse
 // const XML = new XMLParser( {ignoreAttributes: false} )
 // import jc from 'json-cycle'
 const parsers =
-  { yaml: (x, parser) => parser ? parser(x) : parseYAML(x)
-  , yml:  (x, parser) => parser ? parser(x) : parseYAML(x) 
-  , json: (x, parser) => parser ? parser(x) : parseJSON(x)
-  , toml: (x, parser) => parser ? parser(x) : parseTOML(x)
-  , html: (x, parser) => parser ? parser(x) : parseHTML(x)
-  , xml:  (x, parser) => parser ? parser(x) : parseHTML(x)
-  , md:   (x, parser) => parser ? parser(x) : pipe(String, marked.parse, parseHTML)(x)
-  , cbor: (x, parser) => parser ? parser(x) : cborDecode(x)
+  { yaml: parseYAML
+  , yml:  parseYAML
+  , json: parseJSON
+  , toml: parseTOML
+  , html: parseHTML
+  , xml:  parseHTML
+  , md:   pipe(String, marked.parse, parseHTML)
+  , cbor: cborDecode
   , dhall: (string, parser) => {
-    if (parser) return parser(x)
     const veryString = string.toString("utf8")
 
     const access = createWriteStream("/dev/null")

@@ -1,5 +1,9 @@
 # Changelog
 
+##  1.7.8
+
+Cheerio can now be passed as an argument to change the HTML parser, but parse5 is used by default
+
 ## 1.7.5
 
 Using Cheerio as default parser
