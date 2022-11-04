@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.5
+
+Using Cheerio as default parser
+
 ## 1.5.0
 
 - CBOR now working Remotely

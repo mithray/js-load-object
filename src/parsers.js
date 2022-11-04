@@ -5,10 +5,12 @@ import { parse as parseTOML } from "@iarna/toml"
 import { marked } from "marked"
 import { decode as cborDecode } from "@ipld/dag-cbor"
 import shelljs from "shelljs"
-import { parse as parseHTML } from "parse5"
+//import { parse as parseHTML } from "parse5"
 import { pipe } from "ramda"
+import * as cheerio from "cheerio"
 
 const parseJSON = JSON.parse
+const parseHTML = cheerio.load
 
 // import { XMLParser } from "fast-xml-parser"
 // const XML = new XMLParser( {ignoreAttributes: false} )
