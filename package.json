@@ -25,6 +25,9 @@
     "parse",
     "html",
     "xml",
+    "cheerio",
+    "fetch",
+    "parser",
     "object",
     "utility"
   ],
