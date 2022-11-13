@@ -35,15 +35,10 @@ npm install load-object
 
 ## Usage
 
-Include with either module type:
+### ES Modules
 
-### MJS
 ``` node
-import load from "load-object"
-```
-### CJS
-``` node
-const load = require("load-object")
+import { load } from "load-object"
 ```
 
 ### Use Locally
