@@ -7,7 +7,7 @@ import { decode as cborDecode } from "@ipld/dag-cbor"
 import shelljs from "shelljs"
 import { pipe } from "ramda"
 import { parse as parseHTML } from "parse5"
-import * as cheerio from "cheerio"
+//import * as cheerio from "cheerio"
 
 const parseJSON = JSON.parse
 //const parseHTML = (x) => cheerio.load(x)
