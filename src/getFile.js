@@ -1,17 +1,20 @@
 import { readFile /* readdir */ } from "node:fs/promises"
 import { statSync } from "node:fs"
 import { extname, join } from "node:path"
+import parsers from "./parsers.js"
 
 import {
+  prop,
   andThen,
   cond,
   pipe,
   replace,
   when,
-  ifElse /* map, zipObj */,
+  ifElse, /* map, zipObj */
+  tap
 } from "ramda"
 import parsePath from "parse-path"
-import undici from "undici"
+import axios from "axios"
 
 // import { Buffer } from 'node:buffer'
 
@@ -28,13 +31,12 @@ const readRemoteDocument = pipe(
       (href) => getFormat(href) === "html" && extname(href) === "",
       (href) => join(href.replace(/\/$/u, ""), "index.html")
     ),
-  undici.request,
-  andThen((response) => response.body.text())
+  (x) => axios.get(x,{transitional: {silentJSONParsing: false,forcedJSONParsing: false}}),
+  andThen(prop("data")),
 )
 const readRemoteBinary = pipe(
-  undici.fetch,
-  andThen((x) => x.body.getReader().read()),
-  andThen(({ done, value }) => value)
+  (x) => axios.get(x,{responseType: "arraybuffer"}),
+  andThen(prop("data"))
 )
 
 const isRemoteDocument = (href) =>
@@ -51,14 +53,14 @@ const isLocalBinary = (href) =>
 const isLocalDirectory = (href) =>
   ["file"].includes(parsePath(href).protocol) && statSync(href).isDirectory()
 
-export const getFile = cond([
-  [isLocalDocument, readLocalDocument]
+export const getFile = cond(
+  [ [isLocalDocument, readLocalDocument]
   , [isLocalBinary, readLocalBinary]
-
   //  [isLocalDirectory, readLocalDirectory],
   , [isRemoteBinary, readRemoteBinary]
   , [isRemoteDocument, readRemoteDocument]
-,])
+  ]
+  )
 
 export const getFormat = ifElse(
   (href) =>

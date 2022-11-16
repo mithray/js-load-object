@@ -5,12 +5,14 @@ import c from "ansi-colors"
 
 import { load } from "../index.js"
 
-const urls = await load("./spec/test_urls.yaml")
 
 const timestamp = Date.now()
 
+const urls = await load("./spec/test_urls.yaml")
+
 test("Remote Tests", async (tap) => {
   for (const url of urls) {
+
     const testDescription = `Remote ${c.blue(url.format)} should load to an object`
     const res = await load(url.path)
 
@@ -20,6 +22,8 @@ test("Remote Tests", async (tap) => {
 
     writeLocalFile(temporaryFileName, res.toString())
   }
+  /*
+  */
 })
 
 //
