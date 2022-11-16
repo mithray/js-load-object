@@ -1,6 +1,6 @@
 {
   "name": "load-object",
-  "version": "1.7.13",
+  "version": "1.8.0",
   "description": "Takes a path to a file locally or remotely and loads that file into a Javascript Object.",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,6 @@
     "parser",
     "html",
     "xml",
-    "cheerio",
     "fetch",
     "object",
     "utility"

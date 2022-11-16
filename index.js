@@ -1,7 +1,9 @@
-import { cond, andThen, pipe, mapObjIndexed, converge, applyTo, identity, equals} from "ramda"
+import { tap, pickBy, zipObj, always, map, cond, andThen, pipe, mapObjIndexed, converge, applyTo, identity, equals, both} from "ramda"
 import { getFile, getFormat } from "./src/getFile.js"
 import parsers from "./src/parsers.js"
-import * as cheerio from "cheerio"
+import { readdir } from "node:fs/promises"
+import { lstatSync } from "node:fs"
+import parsePath from "parse-path"
 
 const loaders = mapObjIndexed
   ( (parser) => pipe(getFile, andThen(parser))
@@ -42,22 +44,48 @@ export const loadDHALL  = loaders.dhall
 const isFormat =
   (format) => (url) => equals(getFormat(url),format)
 
+const isLocal =
+  (url) =>  ["file"].includes(parsePath(url).protocol)
+
+const isDirectory =
+  (url) => lstatSync(url).isDirectory()
+
+const loadDirectory = 
+  /*
+  pipe
+  ( readdir
+  , andThen( x => x.val ) 
+  , andThen(map(async p => await load(url + "/" + p)))
+  , andThen(tap(console.log))
+  , andThen(Promise.all)
+  , andThen(zipObj)
+  )
+  */
+  async (url) => {
+    let paths = (await readdir(url))
+    let loadPath = async p => await load(url + "/" + p)
+    let vals = await Promise.all(map(loadPath,paths))
+    let obj = zipObj(paths,vals)
+    obj = pickBy( (val,key) => val !== undefined, obj )
+    return obj/// await readdir(url)
+    
+  }
+
 export const load = 
-  cond
-  ([[ isFormat("html") , loadHTML  ]
-  , [ isFormat("xml")  , loadXML   ]
-  , [ isFormat("json") , loadJSON  ]
-  , [ isFormat("toml") , loadTOML  ]
-  , [ isFormat("yaml") , loadYAML  ]
-  , [ isFormat("yml")  , loadYAML  ]
-  , [ isFormat("md")   , loadMD    ]
-  , [ isFormat("dhall"), loadDHALL ]
-  , [ isFormat("cbor") , loadCBOR  ]
-  ])
+  cond(
+  [ [ both(isLocal,isDirectory) , loadDirectory  ]
+  , [ isFormat("html")          , loadHTML       ]
+  , [ isFormat("xml")           , loadXML        ]
+  , [ isFormat("json")          , loadJSON       ]
+  , [ isFormat("toml")          , loadTOML       ]
+  , [ isFormat("yaml")          , loadYAML       ]
+  , [ isFormat("yml")           , loadYAML       ]
+  , [ isFormat("md")            , loadMD         ]
+  , [ isFormat("dhall")         , loadDHALL      ]
+  , [ isFormat("cbor")          , loadCBOR       ]
+  , [ always(true)              , x => undefined ]
+  ]
+  )
 
 
-
-
-//let x = (await load("http://example.com/index.html")).html()
-//let x = (await load("http://example.com/index.html", cheerio.load ))
-//console.log(x)
+//console.log(await load("./ignored"))
