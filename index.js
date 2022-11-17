@@ -33,7 +33,7 @@ export const loadJSON   = loaders.json
 export const loadTOML   = loaders.toml
 export const loadHTML   =
   (url, parser ) => parser 
-    ? pipe(getFile,andThen(parser))(url)
+    ? pipe(getFile, andThen(parser))(url)
     : pipe(getFile, andThen(parseHtml))(url)
 export const loadXML    = loaders.xml
 export const loadMD     = loaders.md
@@ -42,7 +42,7 @@ export const loadDHALL  = loaders.dhall
 
 //export const load = converge(applyTo, [identity, getLoader]) 
 const isFormat =
-  (format) => (url) => equals(getFormat(url),format)
+  (format,options) => (url) => options.formats.includes(getFormat(url)) && equals(getFormat(url),format)
 
 const isLocal =
   (url) =>  ["file"].includes(parsePath(url).protocol)
@@ -61,9 +61,9 @@ const loadDirectory =
   , andThen(zipObj)
   )
   */
-  async (url) => {
+  (options) => async (url) => {
     let paths = (await readdir(url))
-    let loadPath = async p => await load(url + "/" + p)
+    let loadPath = async p => await load(url + "/" + p,options)
     let vals = await Promise.all(map(loadPath,paths))
     let obj = zipObj(paths,vals)
     obj = pickBy( (val,key) => val !== undefined, obj )
@@ -72,20 +72,30 @@ const loadDirectory =
   }
 
 export const load = 
-  cond(
-  [ [ both(isLocal,isDirectory) , loadDirectory  ]
-  , [ isFormat("html")          , loadHTML       ]
-  , [ isFormat("xml")           , loadXML        ]
-  , [ isFormat("json")          , loadJSON       ]
-  , [ isFormat("toml")          , loadTOML       ]
-  , [ isFormat("yaml")          , loadYAML       ]
-  , [ isFormat("yml")           , loadYAML       ]
-  , [ isFormat("md")            , loadMD         ]
-  , [ isFormat("dhall")         , loadDHALL      ]
-  , [ isFormat("cbor")          , loadCBOR       ]
-  , [ always(true)              , x => undefined ]
+  (url, customOptions) => {
+    let defaultOptions =
+      { formats: [ "html", "xml", "json", "toml", "yaml", "yml", "md", "dhall", "cbor" ]
+      , parsers: { html: "parse5", }
+      }
+    let options = { ...defaultOptions, ...customOptions }
+
+  return cond(
+  [ [ both(isLocal,isDirectory)   , loadDirectory(options)  ]
+  , [ isFormat("html", options)   , loadHTML       ]
+  , [ isFormat("xml", options)    , loadXML        ]
+  , [ isFormat("json", options)   , loadJSON       ]
+  , [ isFormat("toml", options)   , loadTOML       ]
+  , [ isFormat("yaml", options)   , loadYAML       ]
+  , [ isFormat("yml", options)    , loadYAML       ]
+  , [ isFormat("md", options)     , loadMD         ]
+  , [ isFormat("dhall", options)  , loadDHALL      ]
+  , [ isFormat("cbor", options)   , loadCBOR       ]
+  , [ always(true, options)       , x => undefined ]
   ]
-  )
+  ) (url)
 
 
-//console.log(await load("./ignored"))
+  }
+
+
+//console.log(await load("./ignored",{formats: ["json"]}))
