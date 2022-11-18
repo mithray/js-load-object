@@ -7,7 +7,11 @@ import { decode as cborDecode } from "@ipld/dag-cbor"
 import shelljs from "shelljs"
 import { pipe } from "ramda"
 import { parse as parseHTML } from "parse5"
+import { XMLParser } from "fast-xml-parser"
 //import * as cheerio from "cheerio"
+
+ const parseXMLInstance = new XMLParser()
+const parseXML = (str) => parseXMLInstance.parse(str)
 
 const parseJSON = JSON.parse
 //const parseHTML = (x) => cheerio.load(x)
@@ -21,7 +25,7 @@ const parsers =
   , json: parseJSON
   , toml: parseTOML
   , html: parseHTML
-  , xml:  parseHTML
+  , xml:  parseXML
   , md:   pipe(String, marked.parse, parseHTML)
   , cbor: cborDecode
   , dhall: (string, parser) => {
