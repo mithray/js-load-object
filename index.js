@@ -96,7 +96,3 @@ export const load =
 
 
   }
-
-//let url = "0ad/mods/public/simulation/templates/mixins/"
-//console.log(await load("./ignored",{formats: ["json"]}))
-//console.log(await load(url,{formats:["xml"]}))

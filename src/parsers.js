@@ -10,7 +10,7 @@ import { parse as parseHTML } from "parse5"
 import { XMLParser } from "fast-xml-parser"
 //import * as cheerio from "cheerio"
 
- const parseXMLInstance = new XMLParser()
+ const parseXMLInstance = new XMLParser({ignoreAttributes: false})
 const parseXML = (str) => parseXMLInstance.parse(str)
 
 const parseJSON = JSON.parse
